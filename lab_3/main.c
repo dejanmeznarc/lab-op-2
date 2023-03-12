@@ -5,25 +5,19 @@
 
 #define ACCURACY 0.000001
 
-complex double guessThirdRootCloser(complex double number, complex double guess);
-
-void printComplex(complex double num);
-
-int isInRangeComplex(complex double guess, complex double solution) {
-
-    complex double delata = cabs(guess - solution);
-
-    return (creal(delata) < ACCURACY) &&
-           (cimag(delata) < ACCURACY);
-
-}
-
 #define SOLUTIONS_NUM 3
 const complex double solutions[SOLUTIONS_NUM] = {
         1,
         -0.5 + 0.866025404 * I, // -0.5 + I*sqrt(3)/2
         -0.5 - 0.866025404 * I, // -0.5 + I*sqrt(3)/2
 };
+
+
+complex double guessThirdRootCloser(complex double number, complex double guess);
+
+void printComplex(complex double num);
+
+int isInRangeComplex(complex double guess, complex double solution);
 
 
 int main() {
@@ -52,6 +46,15 @@ complex double guessThirdRootCloser(complex double number, complex double guess)
 
 void printComplex(complex double num) {
     printf("Complex: Re= %f Im= %f\n", creal(num), cimag(num));
+}
+
+int isInRangeComplex(complex double guess, complex double solution) {
+
+    complex double delata = cabs(guess - solution);
+
+    return (creal(delata) < ACCURACY) &&
+           (cimag(delata) < ACCURACY);
+
 }
 
 
