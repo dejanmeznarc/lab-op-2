@@ -1,9 +1,9 @@
 #include <Arduino.h>
 
 
-#define ROT_SW 2
-#define ROT_A 3
-#define ROT_B 4
+#define PIN_ROT_SW 2
+#define PIN_ROT_A 3
+#define PIN_ROT_B 4
 
 
 void setup() {
@@ -13,9 +13,9 @@ void setup() {
     Serial.println("=== REstart ===");
 
 
-    pinMode(ROT_SW, INPUT_PULLUP);
-    pinMode(ROT_A, INPUT);
-    pinMode(ROT_B, INPUT);
+    pinMode(PIN_ROT_SW, INPUT_PULLUP);
+    pinMode(PIN_ROT_A, INPUT);
+    pinMode(PIN_ROT_B, INPUT);
 }
 
 
@@ -25,22 +25,22 @@ bool prevStateA, curStateA, curStateB;
 void loop() {
 
     // naloga 1
-    if (!digitalRead(ROT_SW)) {
+    if (!digitalRead(PIN_ROT_SW)) {
         Serial.println("tipka je pritisjena");
     }
 
 
     // naloga 2
-    if (!digitalRead(ROT_A) || !digitalRead(ROT_B)) {
+    if (!digitalRead(PIN_ROT_A) || !digitalRead(PIN_ROT_B)) {
         Serial.println("rot dajalnik se vrti v neko smer");
     }
 
 
 
     // naloga 3
-    curStateA = digitalRead(ROT_A);
+    curStateA = digitalRead(PIN_ROT_A);
     if (curStateA != prevStateA && curStateA) {
-        if (digitalRead(ROT_B)) {
+        if (digitalRead(PIN_ROT_B)) {
             Serial.println("CW");
         } else {
             Serial.println("CCW");
