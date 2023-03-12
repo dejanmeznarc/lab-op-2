@@ -22,7 +22,7 @@ const complex double solutions[SOLUTIONS_NUM] = { // 3rd root of 5
 };
 
 
-complex double guessNthRootCloser(unsigned int root, complex double number, complex double guess);
+complex double guessNthRootCloser(unsigned int root, complex double num, complex double guess, unsigned int *guess_num);
 
 void printComplex(complex double num);
 
@@ -37,7 +37,7 @@ int getSolutionIndex(complex double solution) {
 }
 
 
-int bitmap[1000][1000] = {0};
+unsigned int bitmap[1000][1000] = {0};
 
 
 int main() {
@@ -58,18 +58,23 @@ int main() {
             if (!re && !im) continue; //ignore zeros
 
             const complex double firstGuess = re + im * I;
-            const complex double sol = guessNthRootCloser(3, number, firstGuess);
+            unsigned int number_of_guesses = 1;
+            const complex double sol = guessNthRootCloser(3, number, firstGuess, &number_of_guesses);
 
+
+            if(number_of_guesses > 50){
+                continue;
+            }
 
             switch (getSolutionIndex(sol)) {
                 case 0:
-                    bitmap[re + 500][im + 500] = 80;//80
+                    bitmap[re + 500][im + 500] = 80 + number_of_guesses;//80
                     break;
                 case 1:
-                    bitmap[re + 500][im + 500] = 160;//160
+                    bitmap[re + 500][im + 500] = 160 + number_of_guesses;//160
                     break;
                 case 2:
-                    bitmap[re + 500][im + 500] = 240;//240
+                    bitmap[re + 500][im + 500] = 240 + number_of_guesses;//240
                     break;
             }
 //
@@ -97,9 +102,9 @@ int main() {
 }
 
 
-complex double guessNthRootCloser(unsigned int root, complex double number, complex double guess) {
+complex double guessNthRootCloser(unsigned int root, complex double num, complex double guess, unsigned int *guess_num) {
 
-    guess = guess - (cpow(guess, root) - number) / (root * cpow(guess, root - 1));
+    guess = guess - (cpow(guess, root) - num) / (root * cpow(guess, root - 1));
 
     for (int i = 0; i < root; ++i) {
         if (isInRangeComplex(guess, solutions[i])) {
@@ -107,7 +112,9 @@ complex double guessNthRootCloser(unsigned int root, complex double number, comp
         }
     }
 
-    return guessNthRootCloser(root, number, guess);
+    (*guess_num)++;
+
+    return guessNthRootCloser(root, num, guess, guess_num);
 }
 
 void printComplex(complex double num) {
