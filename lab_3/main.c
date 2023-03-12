@@ -3,27 +3,27 @@
 #include <math.h>
 #include "stdbool.h"
 
-#define ACCURACY 0.0001
+#define ACCURACY 0.000001
 
-complex double guessSqrtCloser(complex double number, complex double guess);
+complex double guessThirdRootCloser(complex double number, complex double guess);
 
 
 int main() {
 
 
-    complex double solution = guessSqrtCloser(1, 2);
+    complex double solution = guessThirdRootCloser(1, 0.8 * I);
 
-    printf("Complex: %z\n", solution);
+    printf("Complex: Re= %f Im= %f\n", creal(solution), cimag(solution));
     return 0;
 }
 
 
-complex double guessSqrtCloser(complex double number, complex double guess) {
-    guess = guess - (guess * guess - number) / (2 * guess);
+complex double guessThirdRootCloser(complex double number, complex double guess) {
+    guess = guess - (guess * guess * guess - number) / (3 * guess * guess);
 
 
     if (cabs(guess - sqrt(number)) > ACCURACY) {
-        return guessSqrtCloser(number, guess);
+        return guessThirdRootCloser(number, guess);
     }
     return guess;
 }
