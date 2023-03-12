@@ -9,9 +9,9 @@ int main() {
 //    printf("Prvi dan (1-pon,7ned):\n");
 //    scanf("%d", &monthFirstDay);
 
-    printf("P\tT\tS\tČ\tP\tS\tN\n");
+    printf("P\t T\t S\t Č\t P\t S\t N\n");
 
-    u_int8_t dayNumber=1;
+    unsigned int dayNumber=1;
 
     for (int i = 1; i < (monthFirstDay+monthDays); ++i) {
 
