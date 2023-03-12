@@ -9,11 +9,11 @@
 const complex double solutions[SOLUTIONS_NUM] = {
         1,
         -0.5 + 0.866025404 * I, // -0.5 + I*sqrt(3)/2
-        -0.5 - 0.866025404 * I, // -0.5 + I*sqrt(3)/2
+        -0.5 - 0.866025404 * I, // -0.5 - I*sqrt(3)/2
 };
 
 
-complex double guessThirdRootCloser(complex double number, complex double guess);
+complex double guessNthRootCloser(unsigned int root, complex double number, complex double guess);
 
 void printComplex(complex double num);
 
@@ -23,7 +23,7 @@ int isInRangeComplex(complex double guess, complex double solution);
 int main() {
 
 
-    complex double solution = guessThirdRootCloser(1, -1+4*I);
+    complex double solution = guessNthRootCloser(3, 1, -1 + 4 * I);
 
     printComplex(solution);
 
@@ -31,17 +31,17 @@ int main() {
 }
 
 
-complex double guessThirdRootCloser(complex double number, complex double guess) {
+complex double guessNthRootCloser(unsigned int root, complex double number, complex double guess) {
 
-    guess = guess - (guess * guess * guess - number) / (3 * guess * guess);
+    guess = guess - (cpow(guess, root) - number) / (root * cpow(guess, root - 1));
 
-    for (int i = 0; i < SOLUTIONS_NUM; ++i) {
+    for (int i = 0; i < root; ++i) {
         if (isInRangeComplex(guess, solutions[i])) {
             return guess;
         }
     }
 
-    return guessThirdRootCloser(number, guess);
+    return guessNthRootCloser(root, number, guess);
 }
 
 void printComplex(complex double num) {
