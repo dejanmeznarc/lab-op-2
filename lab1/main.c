@@ -11,19 +11,19 @@ int main() {
 
     printf("P\t T\t S\t Č\t P\t S\t N\n");
 
-    unsigned int dayNumber=1;
+    unsigned int dayNumber = 1;
 
-    for (int i = 1; i < (monthFirstDay+monthDays); ++i) {
+    for (int i = 1; i < (monthFirstDay + monthDays); ++i) {
 
-        if(i < monthFirstDay){
+        if (i < monthFirstDay) {
             printf("\t");
-        }else{
+        } else {
             printf("%d\t", dayNumber++);
         }
 
 
         printf(" ");
-        if(i % 7 == 0) printf("\n");
+        if (i % 7 == 0) printf("\n");
     }
 
     return 0;
