@@ -7,16 +7,19 @@
 #define ACCURACY 0.000001
 
 #define SOLUTIONS_NUM 3
-const complex double solutions[SOLUTIONS_NUM] = { // 3rd root of 1
-        1,
-        -0.5 + 0.866025404 * I, // -0.5 + I*sqrt(3)/2
-        -0.5 - 0.866025404 * I, // -0.5 - I*sqrt(3)/2
-};
-//const complex double solutions[SOLUTIONS_NUM] = { // 3rd root of 5
-//        1.70997595,
-//        -0.854987974 + 1.48088261 * I,
-//        -0.854987974 - 1.48088261 * I,
+//const complex double number = 1;
+//const complex double solutions[SOLUTIONS_NUM] = { // 3rd root of 1
+//        1,
+//        -0.5 + 0.866025404 * I, // -0.5 + I*sqrt(3)/2
+//        -0.5 - 0.866025404 * I, // -0.5 - I*sqrt(3)/2
 //};
+
+const complex double number = 5;
+const complex double solutions[SOLUTIONS_NUM] = { // 3rd root of 5
+        1.70997595,
+        -0.854987974 + 1.48088261 * I,
+        -0.854987974 - 1.48088261 * I,
+};
 
 
 complex double guessNthRootCloser(unsigned int root, complex double number, complex double guess);
@@ -54,8 +57,8 @@ int main() {
         for (int im = -500; im < 499; ++im) {
             if (!re && !im) continue; //ignore zeros
 
-            const complex double number = re + im * I;
-            const complex double sol = guessNthRootCloser(3, 1, number);
+            const complex double firstGuess = re + im * I;
+            const complex double sol = guessNthRootCloser(3, number, firstGuess);
 
 
             switch (getSolutionIndex(sol)) {
@@ -88,7 +91,7 @@ int main() {
         printf("\n");
     }
 
-    shraniBMP(bitmap, 1000, 1000, "dejan_5.bmp");
+    shraniBMP(bitmap, 1000, 1000, "dejan_7.bmp");
 
     return 0;
 }
