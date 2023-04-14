@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 int main() {
-    int monthDays = 76, monthFirstDay = 5;
+    int monthDays = 76, monthFirstDay = 1;
 
 //    printf("Št dni v mesecu:\n");
 //    scanf("%d", &monthDays);

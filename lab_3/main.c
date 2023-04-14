@@ -37,7 +37,7 @@ int getSolutionIndex(complex double solution) {
 }
 
 
-unsigned int bitmap[1000][1000] = {0};
+unsigned char bitmap[1000][1000] = {0};
 
 
 int main() {
@@ -68,13 +68,13 @@ int main() {
 
             switch (getSolutionIndex(sol)) {
                 case 0:
-                    bitmap[re + 500][im + 500] = 80 + number_of_guesses;//80
+                    bitmap[re + 500][im + 500] = 80 * number_of_guesses;//80
                     break;
                 case 1:
-                    bitmap[re + 500][im + 500] = 160 + number_of_guesses;//160
+                    bitmap[re + 500][im + 500] = 160 * number_of_guesses;//160
                     break;
                 case 2:
-                    bitmap[re + 500][im + 500] = 240 + number_of_guesses;//240
+                    bitmap[re + 500][im + 500] = 240 * number_of_guesses;//240
                     break;
             }
 //
